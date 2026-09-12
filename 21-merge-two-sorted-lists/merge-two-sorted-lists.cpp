@@ -36,16 +36,8 @@ public:
             }
             head=head->next;
         }
-        while(l1){
-            head->next=l1;
-            l1=l1->next;
-            head=head->next;
-        }
-        while(l2){
-            head->next=l2;
-            l2=l2->next;
-            head=head->next;
-        }
+        if(!l1) head->next=l2;
+        else head->next=l1;
         return newHead;
     }
 };
