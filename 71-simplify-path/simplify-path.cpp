@@ -3,7 +3,7 @@ public:
     string simplifyPath(string path) {
         int i=0;
         stack<string> st;
-        if(path=="/../..ga/b/.f..d/..../e.baaeeh./.a") return "/..ga/b/.f..d/..../e.baaeeh./.a";
+ 
         while(i<path.size()){
             if(path[i]=='/'){
                 while(i<path.size() && path[i]=='/'){
@@ -12,16 +12,19 @@ public:
             }
             else if(path[i]=='.'){
                 string sh="";
+                int count=0;
                 while(i<path.size() && path[i]!='/'){
+                    if(path[i]=='.') count++;
                     sh+=path[i];
                     i++;
                 }
-                if(sh.size()==2){
+                if(count==2 && sh.size()==2){
                     if(!st.empty()) st.pop();
                 }
-                else if(sh.size()>2){
-                    st.push(sh);
+                else if(count==1 && sh.size()==1){
+                    continue;
                 }
+                else st.push(sh);
             }
             else{
                 string sh="";
